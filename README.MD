@@ -40,6 +40,37 @@ API предоставляет данные о фильмах студии Ghibl
 - rtScore
 Пользователь может добавлять и удалять фильмы в избранном.
 
+## Тестирование
+
+### Юнит-тесты
+
+#### FilmViewModelTest – 7 тестов
+- `initial state` – начальное состояние UI
+- `loadAllFilms success updates films` – успешная загрузка списка фильмов
+- `loadAllFilms network error message` – ошибка сети и отображение сообщения
+- `retry after error` – повторная загрузка после ошибки
+- `search with non-matching query` – поиск без результата
+- `toggleFavourite adding same film twice` – добавление того же самого фильма дважды
+- `refreshFavourites reloads favourite ids` – обновление статуса избранного
+
+#### FilmDetailsViewModelTest – 3 теста
+- `savedStateHandle correct filmId` – корректное чтение ID фильма
+- `loadFilm network error then loads from favourites` – при ошибке сети данные подгружаются из избранного
+- `loadFilm shows error` – ошибка сети + нет в избранном, показ ошибки
+
+---
+
+### Интеграционные тесты
+
+#### FavouriteRepositoryTest (Repository + Room) – 3 теста
+- `addToFavourites_returns_saved_film` – сохранение фильма в избранное
+- `removeFromFavourites_removes_film` – удаление из избранного
+- `addToFavourites_twice` – повторное добавление в избранное
+
+#### UiTest - 1 тест
+- `error_thenRetry_showsData` – ошибка -> нажатие Retry -> успешное состояние
+
+
 ## Скриншоты
 
 |                     Loading                     |                     Error                     |                     List                     |                     Details                     |                     Favourites                     |                     Empty                     |
